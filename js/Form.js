@@ -20,12 +20,14 @@ class Form {
     this.greeting.class("greeting");
   }
 
+  //BP
   hide() {
     this.greeting.hide();
     this.playButton.hide();
     this.input.hide();
   }
 
+  //BP
   handleMousePressed() {
     this.playButton.mousePressed(() => {
       this.input.hide();
@@ -37,9 +39,9 @@ class Form {
       playerCount += 1;
       player.name = this.input.value();
       player.index = playerCount;
-      player.addPlayer();
-      player.updateCount(playerCount);
-      player.getDistance();
+    player.addPlayer();//aa
+      player.updateCount(playerCount); // BP
+     player.getDistance(); //aa
     });
   }
 

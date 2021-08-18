@@ -4,13 +4,9 @@ class Player {
     this.index = null;
     this.positionX = 0;
     this.positionY = 0;
-    this.rank = 0;
-    this.fuel = 185;
-    this.life = 185;
-    this.score = 0;
   }
 
-  addPlayer() {
+   addPlayer() {
     var playerIndex = "players/player" + this.index;
 
     if (this.index === 1) {
@@ -23,12 +19,9 @@ class Player {
       name: this.name,
       positionX: this.positionX,
       positionY: this.positionY,
-      rank: this.rank,
-      score: this.score,
-      life: this.life
     });
   }
-
+  //TA
   getDistance() {
     var playerDistanceRef = database.ref("players/player" + this.index);
     playerDistanceRef.on("value", data => {
@@ -37,7 +30,8 @@ class Player {
       this.positionY = data.positionY;
     });
   }
-
+ 
+  //Bp
   getCount() {
     var playerCountRef = database.ref("playerCount");
     playerCountRef.on("value", data => {
@@ -45,26 +39,28 @@ class Player {
     });
   }
 
+  //Bp
   updateCount(count) {
     database.ref("/").update({
       playerCount: count
     });
   }
 
+  //SA
   update() {
     var playerIndex = "players/player" + this.index;
     database.ref(playerIndex).update({
+      name: this.name,
       positionX: this.positionX,
       positionY: this.positionY,
-      rank: this.rank,
-      score: this.score
-    });
+     });
   }
 
+  //Bp
   static getPlayersInfo() {
     var playerInfoRef = database.ref("players");
     playerInfoRef.on("value", data => {
       allPlayers = data.val();
     });
   }
-}
+} 
