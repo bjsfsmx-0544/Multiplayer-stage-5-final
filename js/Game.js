@@ -30,18 +30,18 @@ class Game {
 
     cars = [car1, car2];
 
-    // C38 TA
+    // C38 AM
     fuels = new Group();
     powerCoins = new Group();
 
-    // Adding fuel sprite in the game
+    // Agregando sprites de combustible en el juego
     this.addSprites(fuels, 4, fuelImage, 0.02);
 
-    // Adding coin sprite in the game
+    // Agregando sprites de monedas en el juego
     this.addSprites(powerCoins, 18, powerCoinImage, 0.09);
   }
 
-  // C38 TA
+  // C38 AM
   addSprites(spriteGroup, numberOfSprites, spriteImage, scale) {
     for (var i = 0; i < numberOfSprites; i++) {
       var x, y;
@@ -71,20 +71,20 @@ class Game {
     if (allPlayers !== undefined) {
       image(track, 0, -height * 5, width, height * 6);
 
-      //index of the array
+      // Indice del arreglo
       var index = 0;
       for (var plr in allPlayers) {
-        //add 1 to the index for every loop
+        // Agrega 1 al índice en cada ciclo
         index = index + 1;
 
-        //use data form the database to display the cars in x and y direction
+        // Usa datos de la base de datos para mostrar los autos en dirección x e y
         var x = allPlayers[plr].positionX;
         var y = height - allPlayers[plr].positionY;
 
         cars[index - 1].position.x = x;
         cars[index - 1].position.y = y;
 
-        // C38  SA
+        // C38  AA
         if (index === player.index) {
           stroke(10);
           fill("red");
@@ -93,14 +93,14 @@ class Game {
           this.handleFuel(index);
           this.handlePowerCoins(index);
           
-          // Changing camera position in y direction
+          // Cambiando la posición de la cámara en la dirección y
           camera.position.x = cars[index - 1].position.x;
           camera.position.y = cars[index - 1].position.y;
 
         }
       }
 
-      // handling keyboard events
+      // Manipulación de eventos de teclado
       if (keyIsDown(UP_ARROW)) {
         player.positionY += 10;
         player.update();
@@ -111,21 +111,22 @@ class Game {
   }
 
   handleFuel(index) {
-    // Adding fuel
+    // Agregando combustible
     cars[index - 1].overlap(fuels, function(collector, collected) {
       player.fuel = 185;
-      //collected is the sprite in the group collectibles that triggered
-      //the event
+      // "collected" es el sprite en el grupo de coleccionables que detona
+      // el evento
       collected.remove();
     });
   }
 
   handlePowerCoins(index) {
+    // Agregando monedas
     cars[index - 1].overlap(powerCoins, function(collector, collected) {
       player.score += 21;
       player.update();
-      //collected is the sprite in the group collectibles that triggered
-      //the event
+      // "collected" es el sprite en el grupo de coleccionables que detona
+      // el evento
       collected.remove();
     });
   }
